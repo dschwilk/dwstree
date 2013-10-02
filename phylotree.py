@@ -37,9 +37,12 @@ use the Felsenstein linked list approach (FNode), althought such an
 approach allows non-recursive pre-order traversal.
 """
 
-__version__ = "$Revision: 1.3 $"
+__version__ = "1.5"
 __needs__ = '2.4'
-__author__ = "Dylan W. Schwilk"
+__program__ =    '''treematic.py'''
+__author__  =    '''Dylan Schwilk (www.pricklysoft.org)'''
+__usage__   =    '''phylotree.py [options] [tree_file]'''
+
 
 import copy
 import logging
@@ -283,7 +286,7 @@ class PhyloTree:
     #     del self
 
     def normalize(self):
-        """Removes all nodes with only one child.  Current version can move root. Not working!"""
+        """Removes all nodes with only one child.  Current version can move root."""
         for node in self.postorder_list():   # can't use generator
             if len(node.children) == 1 :                 
                 thechild = node.children[0]
@@ -435,6 +438,11 @@ def equivalent(a, b, with_bl = False):
     return __clade_equiv(pa,pb, with_bl)
 
 
+def count_polytomies(tree):
+    count = 0
+    for n in tree:
+        if len(n.children) > 2 : count = count+1
+    return count
 
             
 
@@ -458,27 +466,45 @@ def __clade_equiv(a,b, with_bl = False):
 
 
 if __name__ == "__main__":
-    
+    '''Command line program.  '''
+    import sys
     import newick
-    
-    src = open("examples/test.new").read()
+    from optparse import OptionParser
 
-    t1 = newick.create_tree(src)
-    t2 = t1.copy()
-    t3 = t1.copy()
-    t4 = t1.copy()
-    t5 = t1.copy()    
+    parser = OptionParser(usage=__usage__, version ="%prog " + __version__)
+    parser.add_option("-v", "--verbose", action="store_true", dest="verbose", default=False,
+					  help="Print INFO messages to stdout, default=%default")    
+
+    (options, args) = parser.parse_args()
+
+    if options.verbose:
+        phylo_logger.setLevel(logging.INFO)
     
-    t2.resolve()
-    t3.resolve()
-    t4.resolve()
-    t5.resolve()
+    if len(args) == 1 :
+        try :
+            src = open(args[0]).read()
+        except IOError:
+            phylo_logger.error('Error reading file, %s' % args[0])
+            sys.exit()
+    else :
+        src = sys.stdin.read()
+
+    trees = newick.read_trees(src)
+
+
+    for tree in trees:
+        p = count_polytomies(tree)
+        print "N polytomies", p
+
+        t = len(tree.leaves())
+        n = len(tree.descendants())+1
+
+        print "Taxa: %d, Nodes: %d" % (t,n)
+        #tree.normalize()
+        #print tree.write(True) + ";"
+        
+
     
-    print t1.write()
-    print t2.write()
-    print t3.write()
-    print t4.write()
-    print t5.write()
     
 
 

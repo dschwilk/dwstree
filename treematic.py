@@ -23,9 +23,9 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
 # 02111-1307, USA.
 
-"""Python implementation of Cam Webb's phylomatic application
+"""Python implementation of Cam Webb's phylomatic application.  Variation allows non species level tips.
 
-    citation!
+    citation needed!
     
 """
 
@@ -38,7 +38,7 @@ __usage__   =    '''treematic.py [options] [tree_file]'''
 import newick
 from phylotree import PhyloTree
 import logging
-logging.basicConfig(format='\n%(levelname)s:\n%(message)s\n')
+logging.basicConfig(format='%(levelname)s: %(message)s')
 phylo_logger = logging.getLogger('phylo_logger')
 
 
@@ -63,6 +63,7 @@ def phylomatic(mtree,taxa, normalize=False, prune=True):
                         n = c
                     break
             if matched : break
+        if not matched : phylo_logger.warning("NO MATCH: " + "/".join(taxon))
 
     if prune :
         termlist = map(lambda x :x[0], taxa)

@@ -63,7 +63,8 @@ def node_age_exponential(start, stop, n, alpha, reverse=False):
     """Returns n node ages (breakpoints on line start -- stop) according to a
     truncated exponential distribution with mean = alpha*(stop-start), so lamda
     = (1/alpha)(stop-start). If reverse is true, origin of exponential pdf is
-    ancestor age rather than descendant."""
+    ancestor age rather than descendant. So positive alpha values push undated
+    nodes toward tips, negative values push toward root."""
     dist = stop-start
     #lambd = dist*1.0/alpha
     if reverse :
@@ -199,8 +200,10 @@ def bl_bladj(tree, age_dict, age_dist_func = node_age_bladj_original, all_tips_z
     Notes on version2: Function now accepts an "age distribution function" to
     set unfixed node ages between two known age nodes. The default,
     `_node_age_bladj_original` behaves as original: ages are evenly spaced
-    between known ages. Other functions can produce other distributions (such as
-    stochastic uniform or truncated exponential)
+    between known ages. Other functions can produce other distributions (such
+    as stochastic uniform or truncated exponential. Distribution function
+    should return list of ages ordered from DESCENDANT to ANCESTOR ---
+    increasing positive values. )
 
     Function modifies tree, but not age_dict. Does not return a value.
     """
@@ -324,6 +327,14 @@ def _nodes_to_fixed_parent(node):
         par = par.parent
     return vect
 
+def reroot(tree, lab):
+    for node in tree:
+        if node.label == lab:
+            tree = node
+            tree.parent=None
+            return tree
+    return None # root not found
+
 ############################################################################
 # Command line script
 ############################################################################
@@ -401,10 +412,10 @@ def main():
                 phylo_logger.error( "Error reading ages file: %s" % options.ages_file)
                 sys.exit()
             phylo_logger.info("Running bl_bladj")
-            age_dist_func = _node_age_bladj_original  # default
+            age_dist_func = node_age_bladj_original  # default
             if options.uniform_age_dist:
                 phylo_logger.info("Running bl_bladj with uniform age distribution")
-                age_dist_func = _node_age_uniform
+                age_dist_func = node_age_uniform
             if options.exp_age_dist != 0:
                 if options.exp_age_dist < 0 :
                     reverse = True
@@ -413,11 +424,13 @@ def main():
                     reverse = False
                 phylo_logger.info("Running bl_bladj with exponential age distribution, alpha=%f" % options.exp_age_dist)
                 def node_age(start,stop, n):
-                    return _node_age_exponential(start,stop,n,options.exp_age_dist, reverse)
+                    return node_age_exponential(start,stop,n,options.exp_age_dist, reverse)
                 age_dist_func = node_age
             for i in range(options.nreps):
                 newtree = tree.copy()
                 bl_bladj(newtree, a_dict, age_dist_func, False)
+                #t= reroot(newtree,"angiosperms")
+                #result_trees.append(t)
                 result_trees.append(newtree)
         elif options.ageout :
             phylo_logger.info("Printing node ages")

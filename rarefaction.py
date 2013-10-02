@@ -1,9 +1,8 @@
 #! /usr/bin/env python
 
 # File: explore-bl.py
-# Author: Dylan Schwilk (www.pricklysoft.org)
+# Author: Dylan Schwilk
 # Copyright (C) 2009 Dylan W. Schwilk
-# www.pricklysoft.org
 
 # GNU
 # This program is free software; you can redistribute it and/or
@@ -22,15 +21,16 @@
 # 02111-1307, USA.
 
 """
-explore-bl.py. Script to do phylogenetic distance by taxonomic diversity
-rarefaction curves. Options exist for running
+rarefaction.py. Script to do phylogenetic distance by taxonomic diversity
+rarefaction curves. Command line options exist for running. Also check
+constants defined below (eg root of tree).
 """
 
 __version__ = "1"
 __needs__ = '2.4'
 __author__ = "Dylan W. Schwilk"
-__program__ =    '''explore-bl.py'''
-__usage__   =    '''explore_bl.py [options] [tree_file]'''
+__program__ =    '''rarefaction.py'''
+__usage__   =    '''rarefaction.py [options] [tree_file]'''
 
 import phylotree, newick
 import random,logging, math
@@ -49,6 +49,7 @@ NREPS=100  ## number of random td-pd samples per richness
 
 ##params for bl exponential explore
 ALPHAS=[0.2,0.4,0.6,0.8]
+#ALPHAS=[0.2,0.8]
 
 ## defaults  -- may be changed by command line scripts
 ##params for random resolution explore
@@ -219,6 +220,7 @@ def main():
         bl_bladj(tree, age_dict) # standard bladj
         tree.prune_to_taxa(taxa)
         tree.normalize()
+        #print tree
         for i in range(options.toporeps):        
             testtrees.append(tree.copy())
             params.append((options.taxa_file, options.sim_type))
@@ -253,7 +255,7 @@ def main():
                               types are NONE (default), RESOLVE, BLADJ_UNIFORM, or BLADJ_EXP")
 
     ### TEST CODE TO OUTPUT RAW TD-PD bivariate data ###
-    if False :
+    if True :
         for i, t in enumerate(testtrees):
             x,y = tdpd(t,taxa,NREPS)
             for q in range(len(x)):
