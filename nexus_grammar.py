@@ -1,11 +1,9 @@
 #! /usr/bin/env python
 
 # File: nexus_grammar.py
-# Author: Dylan Schwilk (www.pricklysoft.org)
-# $Date: 2005/03/09 00:47:30 $
-# $Revision: 1.1 $
-# $Source: C:\\local\\dylan\\code\\python\\cactus-pie\\nexus\\RCS/nexus_grammar.py $
-# Copyright (C) 2003, 2004, 2005 Dylan W. Schwilk (www.pricklysoft.org)
+# Author: Dylan Schwilk
+# Date: 2005/03/09
+# Copyright 2003, 2004, 2005 Dylan W. Schwilk
 
 # GNU
 # This program is free software; you can redistribute it and/or
@@ -26,7 +24,7 @@
 
 """
 :Author: Dylan W. Schwilk
-:Date:   $Date: 2005/03/09 00:47:30 $
+:Date:   2005/03/09
 
 EBNF grammar and parser for NEXUS file language.  For use with
 SimpleParse. This grammar does not try to recognize all constructs but

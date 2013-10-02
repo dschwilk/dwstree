@@ -40,7 +40,7 @@ approach allows non-recursive pre-order traversal.
 __version__ = "1.5"
 __needs__ = '2.4'
 __program__ =    '''treematic.py'''
-__author__  =    '''Dylan Schwilk (www.pricklysoft.org)'''
+__author__  =    '''Dylan Schwilk'''
 __usage__   =    '''phylotree.py [options] [tree_file]'''
 
 

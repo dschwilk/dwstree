@@ -2,10 +2,8 @@
 
 # File: nexus_parser.py
 # Author: Dylan Schwilk (www.pricklysoft.org)
-# $Date: 2005/03/09 00:57:33 $
-# $Revision: 1.3 $
-# $Source: C:\\local\\dylan\\code\\python\\cactus-pie\\nexus\\RCS/nexus_parser.py $
-# Copyright (C) 2003, 2004, 2005 Dylan W. Schwilk (www.pricklysoft.org)
+# Date: 2005/03/09
+# Copyright 2003, 2004, 2005 Dylan W. Schwilk
 
 # GNU
 # This program is free software; you can redistribute it and/or
@@ -28,8 +26,8 @@ Provides processors for NEXUS files and NEXUS blocks.  The parsers
 inherit from SimpleParse DispatchProcessor.
 '''
 
-__version__ = "$Revision: 1.3 $"
-__author__= "Dylan Schwilk (www.pricklysoft.org)"
+__version__ = "1.3"
+__author__= "Dylan Schwilk"
 
 import nexus_grammar, mx.TextTools, sys
 from nexus_dict import NexusDict   # these keeps sequence

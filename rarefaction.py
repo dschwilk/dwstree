@@ -1,8 +1,7 @@
 #! /usr/bin/env python
 
-# File: explore-bl.py
 # Author: Dylan Schwilk
-# Copyright (C) 2009 Dylan W. Schwilk
+# Copyright 2009 Dylan W. Schwilk
 
 # GNU
 # This program is free software; you can redistribute it and/or
@@ -26,7 +25,7 @@ rarefaction curves. Command line options exist for running. Also check
 constants defined below (eg root of tree).
 """
 
-__version__ = "1"
+__version__ = "1.0"
 __needs__ = '2.4'
 __author__ = "Dylan W. Schwilk"
 __program__ =    '''rarefaction.py'''

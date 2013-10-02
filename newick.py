@@ -2,10 +2,8 @@
 
 # File: newick.py
 # Author: Dylan Schwilk (www.pricklysoft.org)
-# $Date: 2005/03/09 00:42:13 $
-# $Revision: 1.3 $
-# $Source: /home/schwilk/code/python/cactus-pie/nexus/RCS/newick.py $
-# Copyright (C) 2003, 2004, 2005 Dylan W. Schwilk (www.pricklysoft.org)
+# Date: 2005/03/09
+# Copyright 2003, 2004, 2005 Dylan W. Schwilk
 
 # GNU
 # This program is free software; you can redistribute it and/or

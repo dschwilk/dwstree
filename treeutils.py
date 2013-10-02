@@ -29,7 +29,7 @@
 
 __version__ =    '''1.0'''
 __program__ =    '''treeutils.py'''
-__author__  =    '''Dylan Schwilk (www.pricklysoft.org)'''
+__author__  =    '''Dylan Schwilk'''
 __usage__   =    '''treematic.py [options] [tree_file]'''
 
 

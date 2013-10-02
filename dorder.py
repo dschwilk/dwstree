@@ -32,7 +32,7 @@ __usage__ = """usage: dorder.py [options] char1 char2 test [nexus_filename]
         print-ages --- simply prints list of contrast magnitudes and divergence ages"""
 
 __version__ =    "1.0"
-__author__  =    '''Dylan Schwilk (www.pricklysoft.org)'''
+__author__  =    '''Dylan Schwilk'''
 __program__ =    '''dorder'''
 
 from icontrasts import  compute_contrasts, prune_missing_vals

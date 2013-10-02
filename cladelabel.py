@@ -2,10 +2,8 @@
 
 # File: cladelabel.py
 # Author: Dylan Schwilk (www.pricklysoft.org)
-# $Date: 2005/03/09 00:36:38 $
-# $Revision: 1.2 $
-# $Source: /home/schwilk/code/python/cactus-pie/nexus/RCS/cladelabel.py $
-# Copyright (C) 2003, 2004, 2005 Dylan W. Schwilk www.pricklysoft.org
+# Date: 2005/03/09
+# Copyright 2003, 2004, 2005 Dylan W. Schwilk
 
 # GNU
 # This program is free software; you can redistribute it and/or
@@ -40,7 +38,7 @@
    
 
 """
-__version__ =    "$Revision: 1.2 $"
+__version__ =    "1.2"
 __author__  =    '''Dylan Schwilk (www.pricklysoft.org)'''
 __usage__ = '''usage: cladelabel.py clade_label_file [tree_file] '''
 
@@ -81,23 +79,6 @@ def label_clade(tree, taxa, clade_name):
     clade = reduce(lambda a,b : mrca(a,b),leaves)
     if clade :
         clade.label = clade_name
-
-# old implementation -- may be faster, I should take another look
-# since it may not have been buggy afterall
-
-
-#     for clade in tree:
-#         match = True
-#         labels =  map(lambda n:n.label, clade.leaves())
-#         for label in labels:
-#             match = True
-#             if not label in taxa :
-#                 match=False;break
-#         if match :
-#             clade.label=clade_name
-#             return
-#     return
-
 
 def main():
     '''Command line program.  This program reads a nexus file or newick tree file'''

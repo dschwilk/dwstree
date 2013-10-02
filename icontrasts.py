@@ -27,8 +27,8 @@
 """Module for Felsenstein independent contrasts.
 """
 
-__version__ = "$Revision: 1.5 $"
-__author__  =    '''Dylan Schwilk (www.pricklysoft.org)'''
+__version__ = "1.5"
+__author__  = '''Dylan Schwilk'''
 
 
 import math

@@ -1,10 +1,10 @@
 #! /usr/bin/env python
 
 # File: branch_lengths.py
-# Author: Dylan Schwilk (www.pricklysoft.org) and Helene Morlon
+# Author: Dylan Schwilk and Helene Morlon
 # 2008-09-18
 
-# Copyright (C) 2003, 2004, 2005, 2008 Dylan W. Schwilk and Helene Morlon
+# Copyright 2003, 2004, 2005, 2008 Dylan W. Schwilk and Helene Morlon
 
 # GNU
 # This program is free software; you can redistribute it and/or
@@ -118,76 +118,6 @@ def bl_topo(tree):
         else :
             node.bl = float(height(node.parent) - height(node)) #/ total_height
 
-# def bl_bladj(tree, the_age_dict, age_dist_func = node_age_bladj_original, all_tips_zero=False, assume_node_labels=False):
-#     """Set node ages according to bladj algorithm and fixed nodes. Root age
-#     must be fixed in ages_dict. This version allows using bladj on trees with
-#     tips that are not species, i.e allows for assigning branch lengths before
-#     pruning trees. This function will modify the tree topology if all_tips_zero
-#     is False, not merely branch lengths because it will delete entire branches
-#     that lack any fixed node age information. Based on the description of Cam
-#     Webb's bladj algorithm in phylocom and email discussions with Cam.
-
-#     Notes on version2: Function now accepts an "age distribution function" to
-#     set unfixed node ages between two known age nodes. The default,
-#     `_node_age_bladj_original` behaves as original: ages are evenly spaced
-#     between known ages. Other functions can produce other distributions (such as
-#     stochastic uniform or truncated exponential)
-
-#     Function modifies tree, but not age_dict
-#     """
-#     age_dict = the_age_dict.copy()  # needed to avoid problem with changing orginal? How to eliminate this copy?
-
-#     if age_dict.get(tree.ulabel(), 0) == 0 :  raise(ValueError("Error in bladj:  root node must have a fixed age"))
-
-#     if all_tips_zero:  ## assume all tips are age=0, regardless of naming convention
-#         for t in tree.leaves():
-#             age_dict[t.ulabel()]=0
-#     else : # set only TRUE species terminal taxa to age=0. Terminal taxa recognized by
-#            # having an underscore in the node label.
-#         for t in tree.leaves():
-#             if t.label:  ## don't use ulabel()!
-#                 if "_" in t.label :
-#                     age_dict[t.ulabel()]=0
-
-#     _prune_unaged_tips(tree, age_dict)
-
-#     # main loop
-#     for node in tree :
-#        if not (node.ulabel() in age_dict) : # Only work on non fixed nodes
-#            assert(not node.is_tip())  # Should never have unaged tip.
-#            parent_age = age_dict[node.parent.ulabel()]
-#            fd = _fixed_descendants(node,age_dict) # list of all line-of-sight descendents with fixed age
-#            mindist = parent_age - age_dict[fd[0].ulabel()]
-#            minindex = 0
-
-#            # Find descendent with fixed age nearest in age to this node's parent
-#            for j,d in enumerate(fd[1:]):
-#               i=j+1
-#               dist = parent_age - age_dict[d.ulabel()]
-#               if dist == mindist :  # We've found equivalent fixed descendents
-#                   if len(_nodes_to_fixed_parent(d.parent, age_dict)) \
-#                           < len(_nodes_to_fixed_parent(fd[minindex].parent, age_dict)):
-#                       minindex=i    # we choose shortest intervening node distance if age dist is same
-#               elif dist < mindist:  
-#                   mindist = dist
-#                   minindex = i
-#            desc_age = age_dict[fd[minindex].ulabel()]  # winning node, closest fixed age
-#            tofix = _nodes_to_fixed_parent(fd[minindex].parent, age_dict)
-
-#            # set node ages:
-#            new_ages = age_dist_func(desc_age,parent_age,len(tofix))
-#            for i,f in enumerate(tofix):
-#                age_dict[f.ulabel()] = new_ages[i]
-
-#     bl_ages(tree, age_dict)  # assign the new branch lengths via the node age method
-
-# def _add_ages_from_dict(tree,age_dict):
-#     for node in tree:
-#         node.age = age_dict.get(node.label,None)
-#         print node.label, node.age
-# #        if node.label : node.age = age_dict[node.label]
-# #        else : node.age = None
-
 def bl_bladj(tree, age_dict, age_dist_func = node_age_bladj_original, all_tips_zero=False):
     """Set node ages according to bladj algorithm and fixed nodes. Root age
     must be fixed in ages_dict. This version allows using bladj on trees with
@@ -270,12 +200,6 @@ def get_age_dict(filename):
         a_dict[clade] = age
     return a_dict
 
-# def _prune_unaged_tips(tree, age_dict, stop=False):
-#     """Remove all lineages with no fixed ages"""
-#     prunelist = map(lambda y: y.label , filter(lambda x: not age_dict.has_key(x.label), tree.leaves()))
-#     #print prunelist
-#     tree.prune_taxa(prunelist)
-    
 def _prune_unaged_tips(tree):
     """Remove all lineages with no fixed ages"""
     prunelist = map(lambda y: y.label , filter(lambda x: x.age is None, tree.leaves()))
@@ -283,17 +207,6 @@ def _prune_unaged_tips(tree):
     tree.prune_taxa(prunelist)
 
     
-# def _fixed_descendants(node, age_dict, vect=None):
-#     """ Returns list of descendants that have ages fixed in age_dict """
-#     if vect == None: vect = []
-#     if (node.ulabel() in age_dict):
-#         vect.append(node)
-#         return vect
-#     else:
-#         for child in node.children:
-#             _fixed_descendants(child,age_dict,vect)
-#     return vect
-
 def _fixed_descendants(node, vect=None):
     """ Returns list of descendants that have ages fixed in age_dict """
     if vect == None: vect = []
@@ -304,18 +217,6 @@ def _fixed_descendants(node, vect=None):
         for child in node.children:
             _fixed_descendants(child,vect)
     return vect
-
-# def _nodes_to_fixed_parent(node, age_dict, vect=None):
-#     """return a vector containing all ancestor nodes excluding most recent ancestor with fixed age
-#     """
-#     if vect == None: vect = []
-#     if age_dict.has_key(node.ulabel()):
-#         return vect
-#     else :
-#         vect.append(node)
-#         _nodes_to_fixed_parent(node.parent, age_dict, vect)
-#     return vect
-
 
 def _nodes_to_fixed_parent(node):
     """return a vector containing all ancestor nodes excluding most recent ancestor with fixed age
