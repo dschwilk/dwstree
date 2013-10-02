@@ -1,11 +1,17 @@
 #! /usr/bin/env python
 
-# File: treematic.py Author: Dylan Schwilk (www.pricklysoft.org)
+# File: treematic.py Author: Dylan Schwilk
 
-#  $Date: 2008-04-28$
+#  Date: 2008-04-28
 
-#  Copyright (C) 2008 Dylan W. Schwilk www.pricklysoft.org,
-#  Algorithms orginally by Cam Webb
+#  Copyright 2008 Dylan W. Schwilk 
+
+# Algorithm and idea mimics behavior of Cam Webb's phylomatic program
+# (http://phylodiversity.net/phylomatic/). This script may be useful still to
+# someone, but I believe that the current phylomatic web version provides the
+# non-species level tip output as an option now anyway. Note that this script was
+# written in 2008.
+
 
 # GNU
 # This program is free software; you can redistribute it and/or
@@ -23,15 +29,23 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
 # 02111-1307, USA.
 
-"""Python implementation of Cam Webb's phylomatic application.  Variation allows non species level tips.
+"""Python implementation of Cam Webb's phylomatic application. Variation allows
+non species level tips.
+
+Algorithm and idea mimics behavior of Cam Webb's phylomatic program
+(http://phylodiversity.net/phylomatic/). This script may be useful still to
+someone, but I believe that the current phylomatic web version provides the
+non-species level tip output as an option now anyway. Note that this script was
+written in 2008.
+
 
     citation needed!
-    
+
 """
 
 __version__ =    '''1.1'''
 __program__ =    '''treematic.py'''
-__author__  =    '''Dylan Schwilk (www.pricklysoft.org)'''
+__author__  =    '''Dylan Schwilk'''
 __usage__   =    '''treematic.py [options] [tree_file]'''
 
 
