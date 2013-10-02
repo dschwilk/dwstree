@@ -4,14 +4,14 @@ Helpers for embarassingly parallel code.
 # Author: Gael Varoquaux < gael dot varoquaux at normalesup dot org >
 # Copyright: Gael Varoquaux
 # License: BSD 3 clause
-# Modifications 2009-11-11 by D. Schwilk
+# Minor modifications 2009-11-11 by D. Schwilk
 
 try:
     import multiprocessing
 except ImportError:
     multiprocessing = None
 
-#import functools # not in Python 2.4 on HPPC clusters , so removed for now.
+#import functools # Schwilk: not in Python 2.4 on TTU HPPC clusters , so removed for now.
                   #Only affects docstrings.
 import pickle
 
@@ -28,7 +28,6 @@ def delayed(function):
         return function, args, kwargs
     return delayed_function
     
-
 class Parallel(object):
     """ Helper class for readable parallel mapping.
 
