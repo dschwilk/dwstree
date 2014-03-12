@@ -49,8 +49,8 @@ __author__  =    '''Dylan Schwilk'''
 __usage__   =    '''treematic.py [options] [tree_file]'''
 
 
-import newick
-from phylotree import PhyloTree
+from dwstree import newick
+from dwstree.phylotree import PhyloTree
 import logging
 logging.basicConfig(format='%(levelname)s: %(message)s')
 phylo_logger = logging.getLogger('phylo_logger')

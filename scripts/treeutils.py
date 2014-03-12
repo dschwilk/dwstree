@@ -30,11 +30,11 @@
 __version__ =    '''1.0'''
 __program__ =    '''treeutils.py'''
 __author__  =    '''Dylan Schwilk'''
-__usage__   =    '''treematic.py [options] [tree_file]'''
+__usage__   =    '''treeutils.py [options] [tree_file]'''
 
 
-import newick
-from phylotree import PhyloTree
+from dwstree import newick
+from dwstree.phylotree import PhyloTree
 import logging
 logging.basicConfig(format='\n%(levelname)s:\n%(message)s\n')
 phylo_logger = logging.getLogger('phylo_logger')

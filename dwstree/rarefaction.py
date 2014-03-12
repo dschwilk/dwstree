@@ -31,7 +31,7 @@ __author__ = "Dylan W. Schwilk"
 __program__ =    '''rarefaction.py'''
 __usage__   =    '''rarefaction.py [options] [tree_file]'''
 
-import phylotree, newick
+from dwstree import phylotree, newick
 import random,logging, math
 import numpy
 from parallel import Parallel, delayed
