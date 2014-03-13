@@ -43,7 +43,7 @@ __author__  =    '''Dylan Schwilk (www.pricklysoft.org)'''
 __usage__ = '''usage: cladelabel.py clade_label_file [tree_file] '''
 
 
-from phylotree import PhyloTree
+from dwstree.phylotree import PhyloTree
 import logging
 cactus_logger = logging.getLogger('cactus_logger')
 

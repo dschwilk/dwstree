@@ -6,7 +6,9 @@ setup(
     author='Dylan Schwilk',
     author_email='dylan@schwilk.org',
     packages=['dwstree'],
-    scripts=['scripts/treematic.py', 
+    scripts=['scripts/cladelabel.py'
+             'scripts/dorder.py',
+             'scripts/treematic.py', 
              'scripts/treeutils.py', 
              'scripts/rarefaction.py', 
              'scripts/prune2orders.py'],

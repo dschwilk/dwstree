@@ -31,12 +31,12 @@ __usage__ = """usage: dorder.py [options] char1 char2 test [nexus_filename]
         div-age    --- divergence age test
         print-ages --- simply prints list of contrast magnitudes and divergence ages"""
 
-__version__ =    "1.0"
+__version__ =    "1.1"
 __author__  =    '''Dylan Schwilk'''
 __program__ =    '''dorder'''
 
-from icontrasts import  compute_contrasts, prune_missing_vals
-from tree_math import average, weighted_average,  sample_rep
+from dwstree.icontrasts import  compute_contrasts, prune_missing_vals
+from dwstree.tree_math import weighted_average,  sample_rep
 import logging
 phylo_logger = logging.getLogger('phylo_logger')
 
