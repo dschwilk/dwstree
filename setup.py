@@ -3,7 +3,7 @@ from distutils.core import setup
 setup(
     name='DWSTree',
     version='0.1.0',
-    author='Dylan SCwhilk',
+    author='Dylan Schwilk',
     author_email='dylan@schwilk.org',
     packages=['dwstree'],
     scripts=['scripts/treematic.py', 
